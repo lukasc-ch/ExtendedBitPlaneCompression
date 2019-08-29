@@ -70,7 +70,7 @@ def getFMs(model, loss_func, training=True, numBatches=1, batchSize=10, computeG
     
     # CREATE DATASET LOADERS
     import quantLab.quantlab.ImageNet.preprocess as pp
-    datasetTrain, datasetVal, _ = pp.load_datasets('/scratch/datasets/ilsvrc12/', augment=False)
+    datasetTrain, datasetVal, _ = pp.load_datasets('./ilsvrc12/', augment=False)
     if training:
         dataset = datasetTrain
         model.train()
