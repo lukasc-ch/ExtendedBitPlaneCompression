@@ -1,0 +1,6 @@
+[submodule "algoEvals/--force"]
+	path = algoEvals/--force
+	url = git@github.com:spallanzanimatteo/QuantLab.git
+[submodule "algoEvals/quantLab"]
+	path = algoEvals/quantLab
+	url = git@github.com:spallanzanimatteo/QuantLab.git
