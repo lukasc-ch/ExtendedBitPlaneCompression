@@ -83,6 +83,7 @@ def BPC_block(values, variant='baseline', wordwidth=None, prevValue=0):
   debug = False
   chunkSize = len(values)
   chunkSizeL2C = math.ceil(math.log2(chunkSize))
+  wordwidthL2C = math.ceil(math.log2(wordwidth))
   
   #encode first value before differences
   codedStream = ''
@@ -142,14 +143,14 @@ def BPC_block(values, variant='baseline', wordwidth=None, prevValue=0):
               elif runLen > 1:
                 bpcPerfCounterIncr('multi-all-0 DBX')
                 bpcPerfCounterIncr('all-0 DBX', -runLen)
-                codedSymbols.append('01' + bin(runLen-2)[2:].zfill(chunkSizeL2C))
+                codedSymbols.append('01' + bin(runLen-2)[2:].zfill(wordwidthL2C))
           else:
             if runLen == 1:
               codedSymbols.append('001')
             elif runLen > 1:
               bpcPerfCounterIncr('multi-all-0 DBX')
               bpcPerfCounterIncr('all-0 DBX', -runLen)
-              codedSymbols.append('01' + bin(runLen-2)[2:].zfill(chunkSizeL2C))#zfill(5) for max. 32 values per block
+              codedSymbols.append('01' + bin(runLen-2)[2:].zfill(wordwidthL2C))#zfill(5) for max. 32 values per block
             runLen = 0
             codedSymbols.append(symb)
       elif variant == 'ours-03':
@@ -161,14 +162,14 @@ def BPC_block(values, variant='baseline', wordwidth=None, prevValue=0):
               elif runLen > 1:
                 bpcPerfCounterIncr('multi-all-0 DBX')
                 bpcPerfCounterIncr('all-0 DBX', -runLen)
-                codedSymbols.append('001' + bin(runLen-2)[2:].zfill(chunkSizeL2C))
+                codedSymbols.append('001' + bin(runLen-2)[2:].zfill(wordwidthL2C))
           else:
             if runLen == 1:
               codedSymbols.append('01')
             elif runLen > 1:
               bpcPerfCounterIncr('multi-all-0 DBX')
               bpcPerfCounterIncr('all-0 DBX', -runLen)
-              codedSymbols.append('001' + bin(runLen-2)[2:].zfill(chunkSizeL2C))#zfill(5) for max. 32 values per block
+              codedSymbols.append('001' + bin(runLen-2)[2:].zfill(wordwidthL2C))#zfill(5) for max. 32 values per block
             runLen = 0
             codedSymbols.append(symb)
       else:
@@ -180,14 +181,14 @@ def BPC_block(values, variant='baseline', wordwidth=None, prevValue=0):
               elif runLen > 1:
                 bpcPerfCounterIncr('multi-all-0 DBX')
                 bpcPerfCounterIncr('all-0 DBX', -runLen)
-                codedSymbols.append('01' + bin(runLen-2)[2:].zfill(chunkSizeL2C))
+                codedSymbols.append('01' + bin(runLen-2)[2:].zfill(wordwidthL2C))
           else:
             if runLen == 1:
               codedSymbols.append('001')
             elif runLen > 1:
               bpcPerfCounterIncr('multi-all-0 DBX')
               bpcPerfCounterIncr('all-0 DBX', -runLen)
-              codedSymbols.append('01' + bin(runLen-2)[2:].zfill(chunkSizeL2C))
+              codedSymbols.append('01' + bin(runLen-2)[2:].zfill(wordwidthL2C))
             runLen = 0
             codedSymbols.append(symb)
     if debug: 
